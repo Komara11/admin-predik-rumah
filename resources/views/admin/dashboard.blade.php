@@ -180,6 +180,7 @@
             <thead>
                 <tr class="neumorphic-outset rounded-xl">
                     <th class="p-4 font-label-md text-label-md text-on-surface-variant">Tanggal</th>
+                    <th class="p-4 font-label-md text-label-md text-on-surface-variant">Nama User</th>
                     <th class="p-4 font-label-md text-label-md text-on-surface-variant">Lokasi</th>
                     <th class="p-4 font-label-md text-label-md text-on-surface-variant">Luas (T/B)</th>
                     <th class="p-4 font-label-md text-label-md text-on-surface-variant">Tipe</th>
@@ -192,7 +193,8 @@
                 @forelse($latestPredictions as $pred)
                 <tr class="border-b border-surface-dark-shadow/30">
                     <td class="p-4 text-on-surface-variant text-label-sm">{{ $pred->created_at->format('d M Y, H:i') }}</td>
-                    <td class="p-4 font-semibold text-on-surface">{{ $pred->input_data['lokasi'] ?? '-' }}</td>
+                    <td class="p-4 font-semibold text-primary">{{ $pred->input_data['nama_pemohon'] ?? 'Anonim' }}</td>
+                    <td class="p-4 font-semibold text-on-surface">{{ ($pred->input_data['lokasi'] === 'Lainnya' && !empty($pred->input_data['nama_kota'])) ? $pred->input_data['nama_kota'] : ($pred->input_data['lokasi'] ?? '-') }}</td>
                     <td class="p-4">{{ $pred->input_data['luas_tanah'] ?? '-' }}m² / {{ $pred->input_data['luas_bangunan'] ?? '-' }}m²</td>
                     <td class="p-4">{{ $pred->input_data['tipe_properti'] ?? '-' }}</td>
                     <td class="p-4">{{ $pred->input_data['kondisi'] ?? '-' }}</td>
